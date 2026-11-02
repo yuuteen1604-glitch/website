@@ -69,6 +69,7 @@
     ========================== -->
     <section class="hero">
 
+      
 
       <!-- HERO TEXT -->
       <div class="hero-text">
@@ -481,6 +482,209 @@
 
   </footer>
 
+  <dialog class="figure-modal" id="figureModal">
+  <button class="modal-close" id="modalClose">×</button>
+
+  <div class="modal-content">
+    <div class="modal-image">
+      <img id="modalImage" src="" alt="Deku Figure">
+    </div>
+
+    <div class="modal-info">
+      <p class="eyebrow">COLLECTION // DETAIL</p>
+      <span class="modal-category">FIGURE ARCHIVE</span>
+      <h2 id="modalTitle">FIGURE NAME</h2>
+      <div class="modal-line"></div>
+
+      <div class="detail-list">
+        <div class="detail-row">
+          <span>BRAND</span>
+          <strong id="modalBrand"></strong>
+        </div>
+        <div class="detail-row">
+          <span>RELEASE YEAR</span>
+          <strong id="modalYear"></strong>
+        </div>
+        <div class="detail-row">
+          <span>HEIGHT</span>
+          <strong id="modalHeight"></strong>
+        </div>
+        <div class="detail-row">
+          <span>SERIES</span>
+          <strong id="modalSeries"></strong>
+        </div>
+        <div class="detail-row">
+          <span>PRODUCT TYPE</span>
+          <strong id="modalType"></strong>
+        </div>
+      </div>
+
+      <p class="modal-index" id="modalIndex"></p>
+    </div>
+  </div>
+</dialog>
+  
+<!-- =========================
+     FIGURE POPUP SCRIPT
+========================== -->
+<script>
+
+  const cards = document.querySelectorAll(".collection-card");
+  const modal = document.getElementById("figureModal");
+
+  const modalImage = document.getElementById("modalImage");
+  const modalTitle = document.getElementById("modalTitle");
+  const modalBrand = document.getElementById("modalBrand");
+  const modalYear = document.getElementById("modalYear");
+  const modalHeight = document.getElementById("modalHeight");
+  const modalSeries = document.getElementById("modalSeries");
+  const modalType = document.getElementById("modalType");
+  const modalIndex = document.getElementById("modalIndex");
+
+  const closeButton = document.getElementById("modalClose");
+
+
+  // รายละเอียดของฟิกเกอร์แต่ละชิ้น
+  // ตอนนี้เว้นข้อมูลที่ยังไม่ได้ตรวจสอบไว้ก่อน
+
+  const figureDetails = [
+
+    {
+      brand: "Banpresto",
+      year: "2025",
+      height: "22 CM",
+      series: "My Hero Academia",
+      type: "Prize Figure"
+    },
+
+    {
+      brand: "Banpresto",
+      year: "2026",
+      height: "23 CM",
+      series: "My Hero Academia",
+      type: "MASTERLISE Figure"
+    },
+
+    {
+      brand: "Banpresto",
+      year: "2024",
+      height: "10 CM",
+      series: "My Hero Academia",
+      type: "Prize Figure"
+    },
+
+    {
+      brand: "Banpresto",
+      year: "2024",
+      height: "23 CM",
+      series: "My Hero Academia",
+      type: "Figure"
+    },
+
+    {
+      brand: "Banpresto",
+      year: "2024",
+      height: "21 CM",
+      series: "My Hero Academia: You're Next",
+      type: "Prize Figure"
+    },
+
+    {
+      brand: "Banpresto",
+      year: "2025",
+      height: "22 CM",
+      series: "My Hero Academia",
+      type: "Figure"
+    },
+
+    {
+      brand: "Banpresto",
+      year: "N2022",
+      height: "14 CM",
+      series: "My Hero Academia",
+      type: "Figure"
+    },
+
+    {
+      brand: "Banpresto",
+      year: "2026",
+      height: "21 CM",
+      series: "My Hero Academia",
+      type: "MASTERLISE Figure"
+    },
+
+    {
+      brand: "Banpresto",
+      year: "2025",
+      height: "16.5 - 17 CM",
+      series: "My Hero Academia",
+      type: "MASTERLISE Figure"
+    },
+
+    {
+      brand: "Banpresto",
+      year: "2025",
+      height: "18 CM",
+      series: "My Hero Academia",
+      type: "MASTERLISE Figure"
+    }
+
+  ];
+
+
+  // คลิกการ์ดเพื่อเปิดรายละเอียด
+  cards.forEach((card, index) => {
+
+    card.style.cursor = "pointer";
+
+    card.addEventListener("click", () => {
+
+      const image = card.querySelector(".card-image img");
+      const title = card.querySelector(".card-info h3");
+
+      const details = figureDetails[index];
+
+      modalImage.src = image.src;
+      modalImage.alt = image.alt;
+
+      modalTitle.textContent = title.textContent.trim();
+
+      modalBrand.textContent = details.brand;
+      modalYear.textContent = details.year;
+      modalHeight.textContent = details.height;
+      modalSeries.textContent = details.series;
+      modalType.textContent = details.type;
+
+      modalIndex.textContent =
+        `ITEM ${String(index + 1).padStart(2, "0")} / ${cards.length}`;
+
+      modal.showModal();
+
+if (window.innerWidth <= 650) {
+  modal.scrollTop = 0;
+}
+
+    });
+
+  });
+
+
+  // ปุ่มปิด Popup
+  closeButton.addEventListener("click", () => {
+    modal.close();
+  });
+
+
+  // คลิกพื้นที่ด้านนอกเพื่อปิด
+  modal.addEventListener("click", (event) => {
+
+    if (event.target === modal) {
+      modal.close();
+    }
+
+  });
+
+</script>
 
 </body>
 </html>
