@@ -22,42 +22,60 @@ html {
   scroll-behavior: smooth;
 }
 
+
 body {
   min-height: 100vh;
-  background:
-    radial-gradient(circle at 78% 12%, rgba(184,230,0,0.06), transparent 25%),
-    radial-gradient(circle at 20% 55%, rgba(233,223,69,0.035), transparent 30%),
-    var(--bg);
+  background: var(--bg);
   color: var(--text);
   font-family: "Space Grotesk", sans-serif;
   overflow-x: hidden;
+  position: relative;
+  isolation: isolate;
 }
+
 
 /* ---------- BACKGROUND GLOW ---------- */
 
-.glow {
+
+/* ---------- ONE FOR ALL AURORA ---------- */
+
+body::before {
+  content: "";
   position: fixed;
-  pointer-events: none;
-  filter: blur(55px);
+  inset: -40%;
   z-index: -1;
+  pointer-events: none;
+
+  background:
+    radial-gradient(ellipse at 30% 40%,
+      rgba(150,255,0,0.22), transparent 35%),
+    radial-gradient(ellipse at 70% 30%,
+      rgba(0,190,80,0.20), transparent 40%),
+    radial-gradient(ellipse at 50% 75%,
+      rgba(220,255,0,0.12), transparent 35%);
+
+  filter: blur(75px);
+  animation: auroraMove 18s ease-in-out infinite alternate;
 }
 
-.glow-green {
-  width: 320px;
-  height: 320px;
-  top: 10%;
-  right: -130px;
-  background: var(--green-soft);
-  opacity: .18;
+@keyframes auroraMove {
+  0% {
+    transform: translate(-5%, -3%) rotate(0deg) scale(1);
+  }
+
+  50% {
+    transform: translate(5%, 3%) rotate(8deg) scale(1.1);
+  }
+
+  100% {
+    transform: translate(-2%, 6%) rotate(-6deg) scale(1.05);
+  }
 }
 
-.glow-yellow {
-  width: 260px;
-  height: 260px;
-  left: -120px;
-  bottom: 10%;
-  background: var(--yellow-soft);
-  opacity: .12;
+@media (prefers-reduced-motion: reduce) {
+  body::before {
+    animation: none;
+  }
 }
 
 
